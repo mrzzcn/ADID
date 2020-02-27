@@ -14,11 +14,12 @@
   },
   "scripts": {
     "clean": "rm -rf lib",
+    "demo": "cp ./lib/index.js ./docs",
     "build:self": "rollup -c config/rollup.config.js",
     "build:esm": "rollup -c config/rollup.config.esm.js",
-    "build": "npm run clean && NODE_ENV=production npm run build:self && npm run build:esm",
-    "build:dev": "npm run clean && npm run build:self && npm run build:esm",
-    "prepublish": "npm run build"
+    "build": "yarn clean && NODE_ENV=production yarn build:self && yarn build:esm && yarn demo",
+    "build:dev": "yarn clean && yarn build:self && yarn build:esm",
+    "prepublish": "yarn build"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^2.3.1",

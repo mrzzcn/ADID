@@ -79,34 +79,37 @@ function getBrowserFingerPrintAfterLoad () {
   });
 }
 
-export default async function ADID () {
+export default function ADID () {
   if (!supportive.canvas || !supportive.textApi || !supportive.toDataURL) {
-    return {
+    return Promise.reject({
       supportive,
       ADID: uuid(),
       message: 'Canvas api is not support on current browser.'
-    }
+    });
   }
   if (window.location.protocol !== 'https:') {
     console.warn(`
 According to https://www.chromium.org/blink/webcrypto, crypto api is only available under https.
 Please run script under a https domain`)
-    return {
+    return Promise.reject({
       supportive,
       ADID: uuid(),
       message: 'Please run script under a https domain'
-    }
+    });
   }
 
-  const flag = await isFingerPrintSpoofedByPersistentNoise();
-  const fingerPrintBefore = await getBrowserFingerPrint("png");
-  const fingerPrintAfter = await getBrowserFingerPrintAfterLoad();
-  return {
-    supportive,
-    spoofed: flag !== utils.hashes.red || fingerPrintAfter !== fingerPrintBefore,
-    spoofedByRandom: fingerPrintAfter !== fingerPrintBefore,
-    ADID: fingerPrintAfter,
-    spoofedRandomBefore: fingerPrintBefore,
-    spoofedRandomAfter: fingerPrintAfter
-  }
+  return Promise.all([
+    isFingerPrintSpoofedByPersistentNoise(),
+    getBrowserFingerPrint("png"),
+    getBrowserFingerPrintAfterLoad()
+  ]).then(([flag, fingerPrintBefore, fingerPrintAfter]) => {
+    return {
+      supportive,
+      spoofed: flag !== utils.hashes.red || fingerPrintAfter !== fingerPrintBefore,
+      spoofedByRandom: fingerPrintAfter !== fingerPrintBefore,
+      ADID: fingerPrintAfter,
+      spoofedRandomBefore: fingerPrintBefore,
+      spoofedRandomAfter: fingerPrintAfter
+    }
+  })
 }

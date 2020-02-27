@@ -8,7 +8,7 @@ const prod = process.env.NODE_ENV === 'production';
 module.exports = {
   input: 'src/index.ts',
   output: {
-    file: `${common.outputDir}index.js`,
+    file: prod ? `${common.outputDir}index.min.js` : `${common.outputDir}index.js`,
     name: common.name,
     format: 'umd',
     // When export and export default are not used at the same time, set legacy to true.

@@ -17,8 +17,8 @@
     "demo": "cp ./lib/index.js ./docs",
     "build:self": "rollup -c config/rollup.config.js",
     "build:esm": "rollup -c config/rollup.config.esm.js",
-    "build": "yarn clean && NODE_ENV=production yarn build:self && yarn build:esm && yarn demo",
-    "build:dev": "yarn clean && yarn build:self && yarn build:esm",
+    "build": "yarn clean && NODE_ENV=production yarn build:self && yarn build:esm",
+    "build:dev": "yarn clean && yarn build:self && yarn build:esm && yarn demo",
     "prepublish": "yarn build"
   },
   "devDependencies": {

@@ -7,7 +7,7 @@ var version = pkg.version;
 
 var banner =
   `/*!
- * ${pkg.name} ${version}
+ * ${pkg.name.toUpperCase()} ${version}
  * API ${pkg.homepage}
  */
 `;
@@ -20,7 +20,7 @@ function getCompiler (opt) {
   return typescript(opt);
 }
 
-exports.name = pkg.name;
+exports.name = pkg.name.toUpperCase();
 exports.banner = banner;
 exports.getCompiler = getCompiler;
 exports.outputDir = 'lib/';

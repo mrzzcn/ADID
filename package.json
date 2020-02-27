@@ -1,5 +1,5 @@
 {
-  "name": "ADID",
+  "name": "adid",
   "version": "0.0.1",
   "homepage": "https://github.com/mrzzcn/ADID",
   "description": "generate ADID by canvas fingerprint",

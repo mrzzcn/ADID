@@ -1,18 +1,24 @@
 {
   "name": "ADID",
   "version": "0.0.1",
+  "homepage": "https://github.com/mrzzcn/ADID",
   "description": "generate ADID by canvas fingerprint",
   "main": "lib/index.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "author": "Jack <mrzzcn@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mrzzcn/ADID.git"
+  },
   "scripts": {
     "clean": "rm -rf lib",
     "build:self": "rollup -c config/rollup.config.js",
     "build:esm": "rollup -c config/rollup.config.esm.js",
     "build": "npm run clean && NODE_ENV=production npm run build:self && npm run build:esm",
-    "build:dev": "npm run clean && npm run build:self && npm run build:esm"
+    "build:dev": "npm run clean && npm run build:self && npm run build:esm",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^2.3.1",

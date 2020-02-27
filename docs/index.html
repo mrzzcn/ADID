@@ -11,7 +11,7 @@
     </pre>
     <script src="./index.js"></script>
     <script>
-      window.ADID().then(result => {
+      window.ADID().then(function(result) {
         document.querySelector('#result').innerHTML = JSON.stringify(
           result,
           null,
